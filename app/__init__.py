@@ -1,15 +1,18 @@
 from flask import Flask
 from flask_pymongo import PyMongo
 from app.config import Config
+import docker
 
 mongo = PyMongo()
-
+client = docker.from_env()
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     
     # Initialiser MongoDB
     mongo.init_app(app)
+
+    
     
     # Enregistrer les blueprints
     from app.routes.user_routes import user_bp
