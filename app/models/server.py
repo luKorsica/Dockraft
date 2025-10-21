@@ -1,7 +1,7 @@
 from app import mongo, client
 from bson import ObjectId
 from datetime import datetime
-import os
+import os, random
 
 class Server:    
 
@@ -36,9 +36,13 @@ class Server:
     @staticmethod
     def create(data):
         """Créer un nouveau serveur"""
+
+        random_port = random.randint(25000, 65535)
+
         container = client.containers.run(
             data["image"],           
-            name=data["name"],    
+            name=data["name"],
+            ports={'25565/tcp': str(random_port)+"/tcp"},
             detach=True                
         )
                 
@@ -60,3 +64,56 @@ class Server:
         }
     
         return container_obj
+    
+    @staticmethod
+    def find_server_by_id(id):
+        """Récupérer un serveur par ID"""
+        try:
+            server = Server.collection.find_one({'_id': str(id)})
+
+            container = client.containers.get(id)
+
+            started_at = container.attrs['State']['StartedAt']
+
+            start_time = datetime.fromisoformat(started_at.replace('Z', '+00:00'))
+            current_time = datetime.now(start_time.tzinfo)
+
+            uptime = current_time - start_time
+
+
+            days = uptime.days
+            hours, remainder = divmod(uptime.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)            
+
+            if server:
+                server['_id'] = str(server['_id'])
+                server["status"] = container.status
+                server["uptime"] = {
+                    "days": days,
+                    "hours": hours,
+                    "minutes": minutes,
+                    "seconds": seconds,
+                }
+                server["port"] = container.ports
+            return server
+        except:
+            return None
+        
+
+    @staticmethod
+    def start_server(id):
+        """Démarrer un serveur par ID"""
+        try:
+            container = client.containers.get(id)
+
+            print(container.status)
+
+            if(container.status != "running"):
+                container.start()
+            else:
+                container.stop()
+            
+            Server.collection.update_one({"_id": str(id)}, {"$set": {"status": container.status}})
+            return 
+        except:
+            return None

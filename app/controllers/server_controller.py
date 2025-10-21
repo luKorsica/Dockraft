@@ -37,6 +37,24 @@ class ServerController:
             }), 500
         
 
+    
+    @staticmethod
+    def get_server(id):
+        """Récupérer tous les utilisateurs"""
+        try:
+            servers = Server.find_server_by_id(id)
+            return jsonify({
+                'success': True,
+                'data': servers,
+                'count': len(servers)
+            }), 200
+        except Exception as e:
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
+        
+
     @staticmethod
     def create_server():
         """Créer un nouveau serveur"""
@@ -55,4 +73,23 @@ class ServerController:
                 'success': False,
                 'error': str(e)
             }), 500
-    
+        
+
+    @staticmethod
+    def start_server(id):
+        """Démarrer le serveur"""
+        try:
+            data = request.get_json()
+            
+            
+            server = Server.start_server(id)
+            return jsonify({
+                'success': True,
+                'data': server,
+                'message': 'Serveur démarrer avec succès'
+            }), 201
+        except Exception as e:
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
