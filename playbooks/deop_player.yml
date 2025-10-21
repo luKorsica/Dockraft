@@ -1,0 +1,31 @@
+---
+- name: OP un joueur via RCON
+  hosts: localhost
+  gather_facts: false
+  vars:
+    container_name: "chiara"
+    player_name: "ronald_leclown"
+  
+  tasks:
+    - name: Récupérer le mot de passe RCON
+      ansible.builtin.shell:
+        cmd: "docker exec {{ container_name }} grep 'rcon.password=' /minecraft/server.properties | cut -d'=' -f2"
+      register: rcon_password
+      
+    - name: Envoyer la commande OP via RCON
+      ansible.builtin.shell:
+        cmd: "docker exec {{ container_name }} mcrcon -H localhost -P 25575 -p '{{ rcon_password.stdout }}' 'deop {{ player_name }}'"
+      register: op_result
+      
+    - name: Afficher le résultat
+      ansible.builtin.debug:
+        msg: "✅ {{ player_name }} est maintenant OP ! Résultat: {{ op_result.stdout }}"
+        
+    - name: Vérifier dans les logs
+      ansible.builtin.command:
+        cmd: "docker logs {{ container_name }} --tail 5"
+      register: logs
+      
+    - name: Logs du serveur
+      ansible.builtin.debug:
+        var: logs.stdout_lines

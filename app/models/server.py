@@ -42,13 +42,14 @@ class Server:
         container = client.containers.run(
             data["image"],           
             name=data["name"],
-            ports={'25565/tcp': str(random_port)+"/tcp"},
+            ports={'25565/tcp': str(random_port)},
             detach=True                
         )
                 
         container_data = {
             "_id": container.id,
             "container_name": container.name,
+            "port":str(random_port),
             "status": container.status,
             "image": data["image"],
             "created_at": datetime.now(),
