@@ -2,6 +2,9 @@ from app import mongo, client
 from bson import ObjectId
 from datetime import datetime
 import os, random
+import ansible_runner
+import tempfile, subprocess
+
 
 class Server:    
 
@@ -118,3 +121,27 @@ class Server:
             return 
         except:
             return None
+        
+    
+    @staticmethod
+    def playbook_server(id, data):
+        """Exécuter un playbook sur localhost avec des vars du conteneur"""
+        try:
+            container = client.containers.get(id)
+            
+            cmd = [
+                'ansible-playbook',
+                "payloads/command.yml",
+                '-e', f'container_name="{container.name}"',
+                '-e', f'command="{data.get("command", "say error")}"'
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            
+            return {
+                'success': result.returncode == 0,
+                'output': result.stdout
+            }
+            
+        except Exception as e:
+            return {'success': False, 'error': str(e)}

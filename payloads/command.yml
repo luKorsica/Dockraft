@@ -3,7 +3,8 @@
   hosts: localhost
   gather_facts: false
   vars:
-    container_name: "chiara"
+    container_name: "lucas"
+    command: "op Ronald_leClown"
   
   tasks:
     - name: Récupérer le mot de passe RCON
@@ -11,15 +12,11 @@
         cmd: "docker exec {{ container_name }} grep 'rcon.password=' /minecraft/server.properties | cut -d'=' -f2"
       register: rcon_password
       
-    - name: Redemarrer le serveur via RCON
+    - name: Envoyer la commande OP via RCON
       ansible.builtin.shell:
-        cmd: "docker exec {{ container_name }} mcrcon -H localhost -P 25575 -p '{{ rcon_password.stdout }}' 'reload'"
+        cmd: "docker exec {{ container_name }} mcrcon -H localhost -P 25575 -p '{{ rcon_password.stdout }}' '{{ command }}'"
       register: op_result
-      
-    - name: Afficher le résultat
-      ansible.builtin.debug:
-        msg: "✅ Le serveur redemarre ! Résultat: {{ op_result.stdout }}"
-        
+              
     - name: Vérifier dans les logs
       ansible.builtin.command:
         cmd: "docker logs {{ container_name }} --tail 5"

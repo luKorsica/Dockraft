@@ -93,3 +93,22 @@ class ServerController:
                 'success': False,
                 'error': str(e)
             }), 500
+        
+    @staticmethod
+    def playbook_server(id):
+        """Demarrer le serveur"""
+        try:
+            data = request.get_json()
+            
+            
+            server = Server.playbook_server(id, data)
+            return jsonify({
+                'success': True,
+                'data': server,
+                'message': 'Script executer avec succès'
+            }), 201
+        except Exception as e:
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
