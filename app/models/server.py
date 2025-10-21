@@ -6,45 +6,47 @@ import os
 class Server:    
 
     collection = mongo.db.servers
+    collection_images = mongo.db.images
     
     @staticmethod
     def find_all():
         """Récupérer toute les versions"""
-        servers = os.listdir("server/")
+        servers = list(Server.collection_images.find())
+        for server in servers:
+            server['_id'] = str(server['_id'])
         return servers
     
     @staticmethod
     def find_by_version(version, one, two, three):
         """Récupérer par versions"""
-        servers = os.listdir("server/")
-
-
-        for s in servers:
-            if(version not in s and version != "*"):
-                servers.remove(s)
-            if(one+"." not in s and one != "*"):
-                servers.remove(s)
-            if("."+two+"." not in s and two != "*"):
-                servers.remove(s)
-            if("."+three not in s and three != "*"):
-                servers.remove(s)
-            
-        return servers
-    
+        query = {"mod-loader": version}
+        
+        if one != "*" and two != "*" and three != "*":
+            query["version"] = [int(one), int(two), int(three)]
+        
+        elif one != "*" and two == "*":
+            query["version.0"] = int(one)
+        
+        elif one != "*" and two != "*" and three == "*":
+            query["version.0"] = int(one)
+            query["version.1"] = int(two)
+                
+        servers = list(Server.collection_images.find(query))
+        return servers    
     @staticmethod
     def create(data):
         """Créer un nouveau serveur"""
         container = client.containers.run(
-            "ubuntu:latest",           
-            "echo hello world",         
+            data["image"],           
+            name=data["name"],    
             detach=True                
         )
                 
         container_data = {
-            "container_id": container.id,
+            "_id": container.id,
             "container_name": container.name,
             "status": container.status,
-            "image": "ubuntu:latest",
+            "image": data["image"],
             "created_at": datetime.now(),
         }
         

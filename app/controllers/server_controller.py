@@ -43,6 +43,7 @@ class ServerController:
         try:
             data = request.get_json()
             
+            
             server = Server.create(data)
             return jsonify({
                 'success': True,
