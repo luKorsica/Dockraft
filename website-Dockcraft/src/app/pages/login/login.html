@@ -1,68 +1,75 @@
-<div class="min-h-screen flex items-center justify-center">
-    <div class="mx-auto max-w-5xl w-full px-6">
-        <div class="flex flex-wrap md:flex-nowrap items-stretch gap-6">
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-5xl">
 
-            <!-- Card Login (gauche) -->
-            <section class="flex-1 rounded-xl  bg-[#222931] p-8 shadow">
-                <h1 class="text-2xl text-white mb-4">LOGIN</h1>
+    <div class="flex flex-col md:flex-row justify-center items-stretch gap-12 md:mx-auto md:max-w-3xl">
 
-                <div class="mb-4 space-y-2">
-                    <input type="text"
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
-                        placeholder="Email..." />
-                    <input type="password"
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
-                        placeholder="Password..." />
-                </div>
+      <!-- Card Login (gauche) -->
+      <section class="w-full md:flex-1 rounded-xl bg-[#222931] p-8 shadow">
+        <h1 class="text-2xl text-white mb-4">LOGIN</h1>
 
-                <div class="space-y-2">
-                    <button class="bg-[#63BF68] text-white text-sm rounded-lg w-full p-2.5 hover:opacity-90 transition">
-                        Sign in
-                    </button>
-                    <button
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg w-full p-2.5 hover:opacity-80 transition">
-                        Register
-                    </button>
-                </div>
-            </section>
-
-            <!-- Card Register (droite) -->
-            <section class="flex-1 rounded-xl  bg-[#222931] p-8 shadow">
-                <h1 class="text-2xl text-white mb-4">REGISTER</h1>
-
-                <div class="mb-4 space-y-2">
-                    <input type="text"
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
-                        placeholder="Username" />
-                    <input type="email"
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
-                        placeholder="Email..." />
-                    <input type="password"
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
-                        placeholder="Password..." />
-                </div>
-                <!-- Barre sous le password -->
-                <div class="relative w-full h-2 mb-4">
-                    <div class="absolute inset-0 w-full h-2 bg-gray-300 rounded"></div>
-                    <div class="absolute inset-0 w-[25%] h-2 bg-green-500 rounded"></div>
-                </div>
-
-
-                <div>
-                    <input type="password"
-                        class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0 mb-4"
-                        placeholder="Confirm your password..." />
-                </div>
-                <div class="text-[#5E656B] text-xs mb-4">
-                    <p>I agree to our Terms and conditions and Privacy policy</p>
-                </div>
-                <div class="space-y-2">
-                    <button class="bg-[#63BF68] text-white text-sm rounded-lg w-full p-2.5 hover:opacity-80 transition">
-                        Register
-                    </button>
-                </div>
-            </section>
-
+        <div class="mb-8 space-y-2">
+          <input type="text"
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+            placeholder="Email..." />
+          <input type="password"
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+            placeholder="Password..." />
         </div>
+
+        <div class="space-y-2">
+          <button class="bg-[#63BF68] text-white text-sm rounded-lg w-full p-2.5 hover:opacity-90 transition">
+            Sign in
+          </button>
+          <button
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg w-full p-2.5 hover:opacity-80 transition">
+            Register
+          </button>
+        </div>
+      </section>
+
+      <!-- Card Register (droite) -->
+      <section class="w-full md:flex-1 rounded-xl bg-[#222931] p-8 shadow">
+        <h1 class="text-2xl text-white mb-4">REGISTER</h1>
+
+        <div class="mb-4 space-y-2">
+          <input type="text"
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+            placeholder="Username" />
+          <input type="email"
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+            placeholder="Email..." />
+          <input type="password"
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+            placeholder="Password..." />
+        </div>
+
+        <!-- Barre sous le password -->
+        <div class="relative w-full h-2 mb-4">
+          <div class="absolute inset-0 w-full h-2 bg-gray-300 rounded"></div>
+          <div class="absolute inset-0 w-[25%] h-2 bg-green-500 rounded"></div>
+        </div>
+
+        <div>
+          <input type="password"
+            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0 mb-4"
+            placeholder="Confirm your password..." />
+        </div>
+
+        <div class="text-[#5E656B] text-xs mb-4">
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox"
+              class="w-4 h-4 accent-green-500 bg-[#2B333B] border border-[#5E656B] rounded focus:ring-0 focus:outline-none" />
+            <p>I agree to our Terms and conditions and Privacy policy</p>
+          </label>
+        </div>
+
+        <div class="space-y-2">
+          <button class="bg-[#63BF68] text-white text-sm rounded-lg w-full p-2.5 hover:opacity-80 transition">
+            Register
+          </button>
+        </div>
+      </section>
+
     </div>
+  </div>
 </div>
