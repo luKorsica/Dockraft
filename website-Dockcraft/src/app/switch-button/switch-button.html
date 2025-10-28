@@ -1,0 +1,22 @@
+<button
+  type="button"
+  class="relative inline-flex h-7 w-12 items-center rounded-full transition-colors
+         focus:outline-none focus:ring-2 focus:ring-offset-2
+         disabled:opacity-50 disabled:cursor-not-allowed
+         ring-offset-white dark:ring-offset-neutral-900
+         bg-neutral-300 data-[on=true]:bg-emerald-500"
+  [attr.aria-label]="label || null"
+  role="switch"
+  [attr.aria-checked]="checked"
+  [attr.aria-disabled]="disabled || null"
+  [disabled]="disabled"
+  [attr.data-on]="checked"
+  (click)="toggle()"
+  (keydown)="onKeyDown($event)"
+>
+  <span
+    class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow transition
+           translate-x-1 data-[on=true]:translate-x-6"
+    [attr.data-on]="checked"
+  ></span>
+</button>
