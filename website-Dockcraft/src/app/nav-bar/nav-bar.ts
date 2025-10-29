@@ -1,11 +1,26 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './nav-bar.html',
-  styleUrl: './nav-bar.scss'
+  styleUrls: ['./nav-bar.scss'] 
 })
 export class NavBar {
+  public current_route: string = '';
 
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.current_route = this.router.url.split('/')[1] || '';
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.current_route = event.url.split('/')[1] || '';
+      });
+  }
 }

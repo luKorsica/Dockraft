@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ServerCard } from '../../server-card/server-card';
+import { SwitchComponent } from '../../switch-button/switch-button';
 
 @Component({
   selector: 'app-home',
-  imports: [ServerCard],
+  imports: [ServerCard, SwitchComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
-  imports: [SwitchComponent]
 })
 export class Home {
 username = 'Jean Dupont'; 
