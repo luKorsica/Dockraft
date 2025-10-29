@@ -1,0 +1,49 @@
+<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+<!-- Bouton menu mobile -->
+<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
+  aria-controls="default-sidebar" type="button"
+  class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-[#28303B] focus:outline-none focus:ring-2 focus:ring-gray-200 z-50 relative">
+  <span class="sr-only">Open sidebar</span>
+  <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+    <path clip-rule="evenodd" fill-rule="evenodd"
+      d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+    </path>
+  </svg>
+</button>
+
+<!-- Sidebar superposée -->
+<aside id="default-sidebar"
+  class="fixed top-0 left-0 z-[9999] w-9 h-screen bg-[#28303B] overflow-y-auto transition-transform -translate-x-full sm:translate-x-0"
+  aria-label="Sidebar">
+
+  <div class="h-full px-0 py-4">
+    <div class="h-full flex flex-col items-center mt-20">
+      <ul class="space-y-10 text-[#A4A4A4]">
+        <!-- Icône active -->
+        <li class="flex justify-center">
+          <a href="#"
+             class="relative flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#2C3540] is-active">
+            <!-- Barre verte fine collée à droite -->
+            <span class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[#63BF68] rounded-full"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6">
+              <path fill="#a4a4a4"
+                d="M320 312C386.3 312 440 258.3 440 192C440 125.7 386.3 72 320 72C253.7 72 200 125.7 200 192C200 258.3 253.7 312 320 312zM290.3 368C191.8 368 112 447.8 112 546.3C112 562.7 125.3 576 141.7 576L498.3 576C514.7 576 528 562.7 528 546.3C528 447.8 448.2 368 349.7 368L290.3 368z" />
+            </svg>
+          </a>
+        </li>
+
+        <!-- Icône inactive -->
+        <li class="flex justify-center">
+          <a href="#" class="relative flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#2C3540]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6">
+              <path fill="#a4a4a4"
+                d="M465.4 192L431.1 144L209 144L174.7 192L465.4 192zM96 212.5C96 199.2 100.2 186.2 107.9 175.3L156.9 106.8C168.9 90 188.3 80 208.9 80L431 80C451.7 80 471.1 90 483.1 106.8L532 175.3C539.8 186.2 543.9 199.2 543.9 212.5L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 212.5z" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

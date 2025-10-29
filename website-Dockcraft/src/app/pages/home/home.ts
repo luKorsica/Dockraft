@@ -5,7 +5,8 @@ import { ServerCard } from '../../server-card/server-card';
   selector: 'app-home',
   imports: [ServerCard],
   templateUrl: './home.html',
-  styleUrl: './home.scss'
+  styleUrl: './home.scss',
+  imports: [SwitchComponent]
 })
 export class Home {
 username = 'Jean Dupont'; 
