@@ -1,0 +1,129 @@
+<div class="lg:pl-32 px-4 pt-6 pl-16">
+    <!-- Titre principal -->
+    <div class="text-white mb-6 mt-4">
+        <h1 class="text-2xl font-bold">Server Settings: Survival World</h1>
+        <h2 class="text-xl text-gray-400">Dashboard</h2>
+    </div>
+
+
+
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-5xl">
+
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-12 md:mx-auto md:max-w-3xl">
+
+                <!-- Card Server Status (gauche) -->
+                <section class="w-full md:flex-1 rounded-xl bg-[#222931] p-8 shadow">
+                    <h1 class="text-2xl text-white mb-4">Server Status</h1>
+
+                    <div class="space-y-1 mb-6">
+                        <div class="flex items-center gap-2 justify-between">
+                            <div>
+                                <span *ngIf="status == 'Running'" class="text-[#63BF68] font-medium">{{ status }}</span>
+                                <span *ngIf="status == 'Stopped'" class="text-[#BF6363] font-medium">{{ status }}</span>
+                            </div>
+                            <!-- logos -->
+                            <div>
+                                <svg *ngIf="status == 'Running'"
+                                    class="h-5 w-5 flex justify-end http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                    <path fill="#63bf68"
+                                        d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z" />
+                                </svg>
+                                <svg *ngIf="status == 'Stopped'"
+                                    class="h-5 w-5 flex justify-end http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                    <path fill="#bf6363"
+                                        d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z" />
+                                </svg>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex flex-col sm:flex-row gap-4 sm:gap-12">
+                                <!-- Uptime et IP -->
+                                <div class="space-y-1">
+                                    <p class="text-gray-300">Uptime: <span class="text-gray-400">{{ uptime }}</span></p>
+
+                                </div>
+                                <!-- Players -->
+                                <div class="space-y-1">
+                                    <p class="text-gray-300">Players</p>
+                                    <p class="text-gray-400 text-lg">{{ players }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div>
+                            <div>
+                                <button *ngIf="status == 'Running'"
+                                    class="flex-1 sm:flex-none px-10 py-2.5 text-sm font-semibold rounded-lg bg-[#BF6363] text-white hover:bg-[#6c747b] transition-colors">
+                                    Stop
+                                </button>
+                            </div>
+                            <div>
+                                <button *ngIf="status == 'Stopped'"
+                                    class="flex-1 sm:flex-none px-10 py-2.5 text-sm font-semibold rounded-lg bg-[#63BF68] text-white hover:bg-[#69C96F] transition-colors">
+                                    Start
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button [disabled]="status == 'Stopped'"
+                                class="flex-1 sm:flex-none px-10 py-2.5 text-sm font-semibold rounded-lg bg-[#63BF68] text-white hover:bg-[#69C96F] transition-colors">
+                                Restart
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <!-- Card Register (droite) -->
+                <section class="w-full md:flex-1 rounded-xl bg-[#222931] p-8 shadow">
+                    <h1 class="text-2xl text-white mb-4">REGISTER</h1>
+
+                    <div class="mb-4 space-y-2">
+                        <input type="text"
+                            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+                            placeholder="Username" />
+                        <input type="email"
+                            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+                            placeholder="Email..." />
+                        <input type="password"
+                            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0"
+                            placeholder="Password..." />
+                    </div>
+
+                    <!-- Barre sous le password -->
+                    <div class="relative w-full h-2 mb-4">
+                        <div class="absolute inset-0 w-full h-2 bg-gray-300 rounded"></div>
+                        <div class="absolute inset-0 w-[25%] h-2 bg-green-500 rounded"></div>
+                    </div>
+
+                    <div>
+                        <input type="password"
+                            class="bg-[#2C3540] text-[#9EA5AC] text-sm rounded-lg block w-full p-2.5 outline-none focus:ring-0 mb-4"
+                            placeholder="Confirm your password..." />
+                    </div>
+
+                    <div class="text-[#5E656B] text-xs mb-4">
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox"
+                                class="w-4 h-4 accent-green-500 bg-[#2B333B] border border-[#5E656B] rounded focus:ring-0 focus:outline-none" />
+                            <p>I agree to our Terms and conditions and Privacy policy</p>
+                        </label>
+                    </div>
+
+                    <div class="space-y-2">
+                        <button
+                            class="bg-[#63BF68] text-white text-sm rounded-lg w-full p-2.5 hover:opacity-80 transition">
+                            Register
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
