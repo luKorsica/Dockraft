@@ -1,15 +1,4 @@
 <div class="min-h-screen p-8">
-    <!-- Header -->
-    <div class="mb-8">
-        <h1 class="text-white text-3xl font-bold mb-1">Minecraft Container Manager</h1>
-        <p class="text-gray-400 text-sm">Dashboard</p>
-    </div>
-
-    <!-- Create New Container Section -->
-    <div class="mb-6">
-        <h2 class="text-white text-xl font-semibold">Create New Container</h2>
-    </div>
-
     <!-- Main Card -->
     <div class="bg-[#222931] backdrop-blur-sm rounded-2xl p-8 max-w-4xl">
         <!-- Container Icon and Title -->
@@ -39,7 +28,6 @@
                     <div class="flex items-center gap-2">
                         <input type="text" [(ngModel)]="maxPlayers" placeholder="Max players..."
                             class="w-full bg-gray-700/50 text-white placeholder-gray-500 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition" />
-
                     </div>
                 </div>
 
@@ -69,34 +57,77 @@
 
             <!-- Right Column -->
             <div class="space-y-6">
-                <!-- Version -->
-                <div class="flex  justify-between">
-                    <div>
-                        <label class="text-gray-400 text-sm mb-2 block">Mod Loader...</label>
-                        <div class="bg-gray-700/50 rounded-lg max-h-48 overflow-y-auto custom-scrollbar">
-                            <div *ngFor="let loader of modsLoader" (click)="selectedVersion = loader"
-                                class="px-4 py-3 text-gray-300 hover:bg-gray-600/50 cursor-pointer transition"
-                                [class.bg-gray-600/70]="selectedVersion === loader">
-                                {{ loader }}
+                <!-- Custom Select - Mod Loader -->
+                <div class="flex gap-2 ">
+                    <div class="flex-1">
+                        <label class="text-gray-400 text-sm mb-2 block">Mod Loader</label>
+
+                        <div class="relative mod-loader-dropdown">
+                            <button type="button" (click)="toggleModLoaderDropdown()"
+                                class="w-full bg-gray-700/50 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition flex items-center justify-between hover:bg-gray-700/70">
+                                <span class="text-gray-300">{{ selectedModLoader || 'Select a mod loader...' }}</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform"
+                                    [class.rotate-180]="isModLoaderOpen" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div *ngIf="isModLoaderOpen"
+                                class="absolute z-10 w-full mt-2 bg-[#2a3139] rounded-lg shadow-xl border border-gray-600 overflow-hidden">
+                                <div class="max-h-60 overflow-y-auto custom-scrollbar">
+                                    <button *ngFor="let modLoader of modsLoader" type="button"
+                                        (click)="selectModLoader(modLoader.viewValue)"
+                                        class="w-full px-4 py-3 text-left text-gray-300 hover:bg-gray-700/50 transition flex items-center justify-between group">
+                                        <span>{{ modLoader.viewValue }}</span>
+                                        <svg *ngIf="selectedModLoader === modLoader.viewValue"
+                                            class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="flex-1">
+                        <label class="text-gray-400 text-sm mb-2 block">Version</label>
 
-                    <div>
-                        <label class="text-gray-400 text-sm mb-2 block">Version...</label>
-                        <div class="bg-gray-700/50 rounded-lg max-h-48 overflow-y-auto custom-scrollbar">
-                            <div *ngFor="let loader of modsLoader" (click)="selectedVersion = loader"
-                                class="px-4 py-3 text-gray-300 hover:bg-gray-600/50 cursor-pointer transition"
-                                [class.bg-gray-600/70]="selectedVersion === loader">
-                                {{ loader }}
+                        <div class="relative version-dropdown">
+                            <button type="button" (click)="toggleVersionDropdown()"
+                                class="w-full bg-gray-700/50 text-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition flex items-center justify-between hover:bg-gray-700/70">
+                                <span class="text-gray-300">{{ selectedVersion || 'Select a version...' }}</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform"
+                                    [class.rotate-180]="isVersionOpen" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div *ngIf="isVersionOpen"
+                                class="absolute z-10 w-full mt-2 bg-[#2a3139] rounded-lg shadow-xl border border-gray-600 overflow-hidden">
+                                <div class="max-h-60 overflow-y-auto custom-scrollbar">
+                                    <button *ngFor="let version of versions" type="button"
+                                        (click)="selectVersion(version.viewValue)"
+                                        class="w-full px-4 py-3 text-left text-gray-300 hover:bg-gray-700/50 transition flex items-center justify-between group">
+                                        <span>{{ version.viewValue }}</span>
+                                        <svg *ngIf="selectedVersion === version.viewValue"
+                                            class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
-
 
                 <!-- Upload World File -->
                 <div>
