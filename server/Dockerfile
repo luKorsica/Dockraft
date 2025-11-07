@@ -6,7 +6,6 @@ ARG PAPER_BUILD=30
 ENV SERVER_PORT=25565 \
     MEMORY_MIN=1G \
     MEMORY_MAX=2G \
-    EULA=false \
     RCON_PASSWORD=minecraft123
 
 # Créer l'utilisateur minecraft
